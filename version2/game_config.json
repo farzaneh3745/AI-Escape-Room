@@ -1,0 +1,55 @@
+{
+    "intro": "You slowly open your eyes. You are lying on the cold floor of an old **library**. The only door is locked and has a small **4-digit keypad**. Around you, you see a tall **bookshelf**, a wooden **desk** with a **drawer**, a **painting** on the wall and a **grandfather clock**.\n\nFind the clues, solve the puzzles and escape! What do you want to do?",
+  
+    "objects": {
+      "bookshelf": {
+        "description": "A tall bookshelf full of dusty grey books. Three books have bright red spines.",
+        "reveals": "red_books"
+      },
+      "red_books": {
+        "description": "Three red books with Roman numerals on their spines. Inside each one is a handwritten digit: Book I -> 2, Book II -> 5, Book III -> 7.",
+        "hidden": true
+      },
+      "desk": {
+        "description": "An old wooden desk with a drawer. On the desk lies a sheet of paper that looks completely blank.",
+        "reveals": "paper"
+      },
+      "paper": {
+        "description": "A sheet of paper that looks completely blank.",
+        "hidden": true,
+        "can_take": true,
+        "read_with": "uv_flashlight",
+        "secret_text": "The clock is exactly one hour slow."
+      },
+      "drawer": {
+        "description": "A desk drawer with a 3-digit lock.",
+        "locked": true,
+        "code": "257",
+        "contains": "brass_key"
+      },
+      "brass_key": {
+        "description": "A small brass key.",
+        "hidden": true,
+        "can_take": true
+      },
+      "painting": {
+        "description": "A portrait of a stern librarian. The golden frame has a tiny keyhole on its side.",
+        "locked": true,
+        "key": "brass_key",
+        "contains": "uv_flashlight"
+      },
+      "uv_flashlight": {
+        "description": "A small UV flashlight. Its purple light can show invisible ink.",
+        "hidden": true,
+        "can_take": true
+      },
+      "clock": {
+        "description": "A tall grandfather clock. It has stopped at 8:25."
+      },
+      "door": {
+        "description": "A heavy wooden door with a 4-digit keypad. It is the only way out.",
+        "locked": true,
+        "code": "0925"
+      }
+    }
+  }
