@@ -1,0 +1,12 @@
+# Secret keys - never upload!
+.env
+
+# Virtual environment (too big, everyone creates their own)
+.venv/
+
+# Python temporary files
+__pycache__/
+*.pyc
+
+# Editor settings
+.vscode/
