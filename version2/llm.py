@@ -8,7 +8,7 @@ from google.genai import types
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"), http_options=types.HttpOptions(timeout=30_000))
 MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
 
 TRANSLATOR_PROMPT = """
@@ -22,7 +22,8 @@ Example: "use the key on the painting" -> {"action": "use", "target": "painting"
 
 def understand_action(player_text):
     """The player's sentence -> a command, e.g. {"action": "take", "target": "brass_key", ...}"""
-    config = types.GenerateContentConfig(system_instruction=TRANSLATOR_PROMPT, response_mime_type="application/json")
+    config = types.GenerateContentConfig(system_instruction=TRANSLATOR_PROMPT, response_mime_type="application/json",
+                                         thinking_config=types.ThinkingConfig(thinking_level="low"))
     response = client.models.generate_content(model=MODEL, contents=player_text, config=config)
     return json.loads(response.text)
 
@@ -35,6 +36,7 @@ Do not change what happened, and do not add new objects, clues or numbers.
 
 def describe_result(fact):
     """The referee's short FACT -> a nice description for the player."""
-    config = types.GenerateContentConfig(system_instruction=STORYTELLER_PROMPT)
+    config = types.GenerateContentConfig(system_instruction=STORYTELLER_PROMPT,
+                                         thinking_config=types.ThinkingConfig(thinking_level="low"))
     response = client.models.generate_content(model=MODEL, contents="FACT: " + fact, config=config)
     return response.text
