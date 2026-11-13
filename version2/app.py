@@ -9,7 +9,6 @@ st.title("🗝️ AI Escape Room - Version 2")
 if "game" not in st.session_state:
     st.session_state.game = new_game()
     st.session_state.messages = [{"role": "assistant", "content": CONFIG["intro"]}]
-    # st.session_state.last_turn = None
 game = st.session_state.game
 
 with st.sidebar:
@@ -23,8 +22,6 @@ with st.sidebar:
     st.header("Game state (kept by Python)")
     st.write("🎒 Inventory:", ", ".join(game["inventory"]) or "empty")
     st.write("✅ Solved:", ", ".join(game["solved"]) or "nothing yet")
-    # if st.session_state.last_turn:
-    #     st.json(st.session_state.last_turn)
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
@@ -52,5 +49,4 @@ if player_text:
 
     st.session_state.messages.append({"role": "user", "content": player_text})
     st.session_state.messages.append({"role": "assistant", "content": reply})
-    # st.session_state.last_turn = {"You said": player_text, "Gemini understood": command, "Python decided": fact}
     st.rerun()

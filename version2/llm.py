@@ -11,6 +11,7 @@ load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"), http_options=types.HttpOptions(timeout=30_000))
 MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash")
 
+
 TRANSLATOR_PROMPT = """
 Turn the player's message into a JSON command for an escape room game.
 Actions: look, inventory, examine, take, enter_code, use, open, other.
